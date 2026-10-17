@@ -1,3 +1,5 @@
+const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 /* ===== Menu no celular ===== */
 const menuBotao = document.querySelector(".menu-botao");
 const menu = document.getElementById("menu");
@@ -146,6 +148,8 @@ function mostrarEtapa(i, focar = false) {
   });
   if (focar) passos[i].focus();
 
+  document.querySelector(".trilha").style.setProperty("--p", i / (etapas.length - 1));
+
   btnAnterior.disabled = i === 0;
   btnProxima.disabled = i === etapas.length - 1;
 
@@ -225,6 +229,12 @@ let pontos = 0;
 function mostrarPergunta() {
   const q = perguntas[indice];
   elProgresso.textContent = `Pergunta ${indice + 1} de ${perguntas.length}`;
+  document.getElementById("quiz-barra").style.width = `${(indice / perguntas.length) * 100}%`;
+  [elPergunta, elOpcoes].forEach((el) => {
+    el.style.animation = "none";
+    void el.offsetWidth;
+    el.style.animation = "";
+  });
   elPergunta.textContent = q.pergunta;
   elFeedback.textContent = "";
   elFeedback.className = "quiz-feedback";
@@ -276,7 +286,15 @@ btnAvancar.addEventListener("click", () => {
 function mostrarResultado() {
   quizArea.hidden = true;
   quizFinal.hidden = false;
-  elResultado.textContent = `Você acertou ${pontos} de ${perguntas.length}`;
+  document.getElementById("quiz-barra").style.width = "100%";
+  // contagem animada da pontuação
+  let mostrado = 0;
+  elResultado.textContent = `Você acertou 0 de ${perguntas.length}`;
+  const contar = setInterval(() => {
+    if (mostrado >= pontos) { clearInterval(contar); return; }
+    mostrado++;
+    elResultado.textContent = `Você acertou ${mostrado} de ${perguntas.length}`;
+  }, semMovimento ? 0 : 280);
   const mensagens = [
     "Vale revisar as seções do site e tentar de novo.",
     "Bom começo. Uma revisão rápida já ajuda bastante.",
@@ -316,30 +334,90 @@ filtros.forEach((botao) => {
   });
 });
 
-/* ===== Biblioteca: trailer do YouTube ===== */
-/* O vídeo só é carregado quando a pessoa clica, e não começa sozinho.
-   Aberto direto do computador (file://), o YouTube costuma recusar o player,
-   então nesse caso o botão abre o trailer no próprio YouTube. */
-const playerBotao = document.getElementById("player-botao");
-const player = document.getElementById("player-trailer");
-const idVideo = playerBotao.dataset.video;
-const abertoLocalmente = location.protocol === "file:";
+/* ===== Biblioteca: documentário Mboraihu ===== */
+/* O player do YouTube já vem no HTML e não inicia sozinho.
+   Quando o site é aberto direto do computador (file://), o YouTube recusa
+   a incorporação; nesse caso o player vira miniatura com link para a plataforma. */
+const player = document.getElementById("player-mboraihu");
+const idVideo = player.dataset.video;
 
-if (abertoLocalmente) {
-  document.getElementById("player-rotulo").textContent = "Ver o trailer no YouTube";
+if (location.protocol === "file:") {
+  player.innerHTML = `
+    <img class="player-capa" src="https://i.ytimg.com/vi/${idVideo}/hqdefault.jpg"
+         alt="Miniatura do documentário Mboraihu — O Espírito que nos Une" onerror="this.remove()">
+    <a class="player-botao" href="https://www.youtube.com/watch?v=${idVideo}" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+      <span>Ver no YouTube</span><span class="sr">(abre em nova aba)</span>
+    </a>`;
 }
 
-playerBotao.addEventListener("click", () => {
-  if (abertoLocalmente) {
-    window.open(`https://www.youtube.com/watch?v=${idVideo}`, "_blank", "noopener,noreferrer");
-    return;
-  }
-  const iframe = document.createElement("iframe");
-  iframe.src = `https://www.youtube-nocookie.com/embed/${idVideo}?rel=0`;
-  iframe.title = "Trailer de Mboraihu: O espírito que nos une";
-  iframe.allow = "accelerometer; encrypted-media; gyroscope; picture-in-picture";
-  iframe.allowFullscreen = true;
-  iframe.referrerPolicy = "strict-origin-when-cross-origin";
-  player.replaceChildren(iframe);
-  iframe.focus();
+/* ===== Entrada do topo da página ===== */
+requestAnimationFrame(() => document.querySelector(".hero").classList.add("pronto"));
+
+/* ===== Revelar elementos ao rolar ===== */
+const grupos = [
+  ".secao-cabeca", ".saber", ".nota-lateral", ".aviso", ".ficha", ".trilha", ".trilha-painel",
+  ".destaque", ".etica", ".sus-bloco", ".quiz", ".conclusao h2", ".conclusao p",
+  ".filtros", ".material", ".porque", ".referencias h2", ".lista-ref li"
+];
+const revelaveis = [];
+grupos.forEach((sel) => {
+  document.querySelectorAll(sel).forEach((el) => {
+    const irmaos = [...el.parentElement.children].filter((x) => x.matches(sel));
+    el.style.setProperty("--i", irmaos.indexOf(el));
+    el.classList.add("revela");
+    revelaveis.push(el);
+  });
 });
+
+if (semMovimento || !("IntersectionObserver" in window)) {
+  revelaveis.forEach((el) => el.classList.add("visivel"));
+} else {
+  const obsRevela = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visivel");
+          obsRevela.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+  revelaveis.forEach((el) => obsRevela.observe(el));
+}
+
+/* Ao filtrar a biblioteca, os cartões que aparecem não devem ficar invisíveis */
+document.querySelectorAll(".filtro").forEach((b) =>
+  b.addEventListener("click", () => materiais.forEach((m) => m.classList.add("visivel")))
+);
+
+/* ===== Barra de leitura, topo compacto e leve paralaxe na prancha ===== */
+const topo = document.querySelector(".topo");
+const prancha = document.querySelector(".hero-figura");
+let agendado = false;
+let pranchaPronta = false;
+
+// quando a entrada termina, a paralaxe assume o controle da posição
+prancha.addEventListener("animationend", (e) => {
+  if (e.animationName !== "pousa") return;
+  prancha.style.animation = "none";
+  prancha.style.opacity = "1";
+  pranchaPronta = true;
+  aoRolar();
+});
+
+function aoRolar() {
+  agendado = false;
+  const y = window.scrollY;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  topo.style.setProperty("--rolagem", total > 0 ? Math.min(y / total, 1) : 0);
+  topo.classList.toggle("rolado", y > 30);
+  if (pranchaPronta && !semMovimento && y < window.innerHeight * 1.2) {
+    prancha.style.transform = `translateY(${y * -0.08}px) rotate(${1.2 - y * 0.002}deg)`;
+  }
+}
+window.addEventListener("scroll", () => {
+  if (!agendado) { agendado = true; requestAnimationFrame(aoRolar); }
+}, { passive: true });
+aoRolar();
