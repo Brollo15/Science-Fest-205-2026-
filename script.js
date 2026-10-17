@@ -60,52 +60,176 @@ const detalhe = document.getElementById("detalhe-planta");
 function fecharDetalhe() {
   detalhe.hidden = true;
   detalhe.innerHTML = "";
-  fichas.forEach((f) => f.setAttribute("aria-expanded", "false"));
+  fichas.forEach((f) => {
+    f.classList.remove("aberta");
+    f.querySelector(".ficha-abrir").setAttribute("aria-expanded", "false");
+  });
+}
+
+function abrirFicha(ficha) {
+  const botao = ficha.querySelector(".ficha-abrir");
+  if (ficha.classList.contains("aberta")) {
+    fecharDetalhe();
+    botao.focus();
+    return;
+  }
+
+  const p = plantas[ficha.dataset.planta];
+  fecharDetalhe();
+  ficha.classList.add("aberta");
+  botao.setAttribute("aria-expanded", "true");
+
+  detalhe.innerHTML = `
+    <h3>${p.nome}</h3>
+    <p class="cientifico">${p.cientifico}</p>
+    <p>${p.nota}</p>
+    <div class="comparativo">
+      <div class="comp-tradicao">
+        <h4>Uso tradicional informado</h4>
+        <p>${p.uso}</p>
+      </div>
+      <div class="comp-ciencia">
+        <h4>Eficácia clinicamente comprovada</h4>
+        <p>Este trabalho não apresenta estudos clínicos sobre esta planta. Por isso, o uso ao lado não deve ser entendido como comprovado nem como indicação de tratamento.</p>
+      </div>
+    </div>
+    <p>Para saber se um uso tradicional é seguro e eficaz, é preciso pesquisa científica feita com ética e com a participação das comunidades.</p>
+    <button type="button" class="fechar">Fechar ficha</button>
+  `;
+  detalhe.hidden = false;
+  detalhe.style.animation = "none";
+  void detalhe.offsetWidth; // reinicia a animação
+  detalhe.style.animation = "";
+
+  detalhe.querySelector(".fechar").addEventListener("click", () => {
+    fecharDetalhe();
+    botao.focus();
+  });
+
+  detalhe.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 fichas.forEach((ficha) => {
-  ficha.addEventListener("click", () => {
-    const jaAberta = ficha.getAttribute("aria-expanded") === "true";
-    if (jaAberta) {
-      fecharDetalhe();
-      ficha.focus();
-      return;
-    }
-
-    const p = plantas[ficha.dataset.planta];
-    fichas.forEach((f) => f.setAttribute("aria-expanded", "false"));
-    ficha.setAttribute("aria-expanded", "true");
-
-    detalhe.innerHTML = `
-      <h3>${p.nome}</h3>
-      <p class="cientifico">${p.cientifico}</p>
-      <p>${p.nota}</p>
-      <div class="comparativo">
-        <div class="comp-tradicao">
-          <h4>Uso tradicional informado</h4>
-          <p>${p.uso}</p>
-        </div>
-        <div class="comp-ciencia">
-          <h4>Eficácia clinicamente comprovada</h4>
-          <p>Este trabalho não apresenta estudos clínicos sobre esta planta. Por isso, o uso ao lado não deve ser entendido como comprovado nem como indicação de tratamento.</p>
-        </div>
-      </div>
-      <p>Para saber se um uso tradicional é seguro e eficaz, é preciso pesquisa científica feita com ética e com a participação das comunidades.</p>
-      <button type="button" class="fechar">Fechar ficha</button>
-    `;
-    detalhe.hidden = false;
-    detalhe.style.animation = "none";
-    void detalhe.offsetWidth; // reinicia a animação
-    detalhe.style.animation = "";
-
-    detalhe.querySelector(".fechar").addEventListener("click", () => {
-      fecharDetalhe();
-      ficha.focus();
-    });
-
-    detalhe.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  // o botão é o caminho acessível; clicar em qualquer parte da ficha também abre
+  ficha.addEventListener("click", (e) => {
+    abrirFicha(ficha);
   });
 });
+
+/* ===== Herbário 3D ===== */
+/* Para ativar um modelo, coloque o arquivo .glb em assets/models/ com o nome indicado abaixo.
+   Enquanto o arquivo não existir (ou se falhar ao carregar), a ilustração continua no lugar.
+   Os modelos são só para ver: giram sozinhos e não respondem a mouse ou toque.
+   O aviso de que são ilustrativos fica no texto abaixo do herbário. */
+const MODELOS_3D = {
+  copaiba: {
+    arquivo: "assets/models/copaiba.glb",
+    alt: "Modelo 3D ilustrativo de um ramo de copaíba com folhas e frutos"
+  },
+  jatoba: {
+    arquivo: "assets/models/jatoba.glb",
+    alt: "Modelo 3D ilustrativo de um ramo de jatobá com vagens"
+  },
+  goiabeira: {
+    arquivo: "assets/models/goiabeira.glb",
+    alt: "Modelo 3D ilustrativo de um ramo de goiabeira com frutos"
+  }
+};
+
+const BIBLIOTECA_3D = "assets/vendor/model-viewer-umd.min.js";
+let carregandoBiblioteca = null;
+
+function carregarModelViewer() {
+  if (customElements.get("model-viewer")) return Promise.resolve();
+  if (!carregandoBiblioteca) {
+    carregandoBiblioteca = new Promise((ok, falha) => {
+      const s = document.createElement("script");
+      s.src = BIBLIOTECA_3D;
+      s.onload = () => customElements.whenDefined("model-viewer").then(ok);
+      s.onerror = falha;
+      document.head.appendChild(s);
+    });
+  }
+  return carregandoBiblioteca;
+}
+
+async function arquivoExiste(url) {
+  // aberto direto do computador (file://) o navegador não deixa ler os modelos
+  if (location.protocol === "file:") return false;
+  try {
+    const r = await fetch(url, { method: "HEAD", cache: "no-cache" });
+    return r.ok;
+  } catch {
+    return false;
+  }
+}
+
+function montarVisualizador(ficha, cfg) {
+  const area = ficha.querySelector(".ficha-visual");
+  const ilustracao = area.querySelector(".ficha-desenho");
+
+  // modelo apenas para ver: sem câmera controlável, zoom ou toque; só o giro automático
+  const mv = document.createElement("model-viewer");
+  mv.setAttribute("src", cfg.arquivo);
+  mv.setAttribute("alt", cfg.alt);
+  mv.setAttribute("tabindex", "-1");
+  mv.setAttribute("interaction-prompt", "none");
+  mv.setAttribute("disable-zoom", "");
+  mv.setAttribute("disable-pan", "");
+  mv.setAttribute("disable-tap", "");
+  mv.setAttribute("camera-orbit", "0deg 78deg auto");
+  mv.setAttribute("shadow-intensity", "0.55");
+  mv.setAttribute("shadow-softness", "1");
+  mv.setAttribute("exposure", "1.05");
+  mv.setAttribute("environment-image", "neutral");
+  mv.setAttribute("loading", "lazy");
+  if (!semMovimento) {
+    mv.setAttribute("auto-rotate", "");
+    mv.setAttribute("auto-rotate-delay", "0");
+    mv.setAttribute("rotation-per-second", "16deg");
+  }
+
+  // a ilustração fica visível como "pôster" enquanto o modelo carrega
+  const poster = ilustracao.cloneNode(true);
+  poster.removeAttribute("hidden");
+  poster.setAttribute("slot", "poster");
+  poster.classList.add("poster-3d");
+  mv.appendChild(poster);
+
+  mv.addEventListener("load", () => {
+    ilustracao.setAttribute("hidden", ""); // SVG não tem a propriedade .hidden
+    ficha.classList.add("tem-3d");
+  });
+
+  mv.addEventListener("error", () => {
+    // falhou: volta a ilustração original e o resto do site segue normal
+    mv.remove();
+    ilustracao.removeAttribute("hidden");
+    ficha.classList.remove("tem-3d");
+  });
+
+  area.appendChild(mv);
+}
+
+// cada modelo só é procurado e carregado quando a ficha se aproxima da tela
+const obs3D = "IntersectionObserver" in window
+  ? new IntersectionObserver((entradas) => {
+      entradas.forEach(async (e) => {
+        if (!e.isIntersecting) return;
+        obs3D.unobserve(e.target);
+        const cfg = MODELOS_3D[e.target.dataset.planta];
+        if (!cfg || !(await arquivoExiste(cfg.arquivo))) return;
+        try {
+          await carregarModelViewer();
+          montarVisualizador(e.target, cfg);
+        } catch {
+          /* sem a biblioteca, a ilustração continua */
+        }
+      });
+    }, { rootMargin: "300px 0px" })
+  : null;
+
+if (obs3D) fichas.forEach((f) => obs3D.observe(f));
 
 /* ===== Da tradição à ciência ===== */
 const etapas = [
