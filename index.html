@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medicina Tradicional Indígena e Saúde Pública</title>
+  <meta name="description" content="Site de apoio a uma apresentação escolar sobre a utilização da medicina tradicional indígena para o avanço da saúde pública no Brasil.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <nav class="nav" aria-label="Seções do site">
+      <a class="marca" href="#inicio"><img class="logo" src="data:image/png;base64,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" alt="Colégio de Aplicação Univali e UNIVALI" width="474" height="157"></a>
+      <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul id="menu" class="menu">
+        <li><a href="#saberes">Saberes</a></li>
+        <li><a href="#plantas">Plantas</a></li>
+        <li><a href="#ciencia">Tradição e ciência</a></li>
+        <li><a href="#etica">Ética</a></li>
+        <li><a href="#sus">SUS</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+        <li><a href="#biblioteca">Biblioteca</a></li>
+        <li><a href="#referencias">Referências</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- 1. Página inicial -->
+    <section id="inicio" class="hero">
+      <div class="hero-texto">
+        <p class="hero-contexto"><span class="feira">Science Fest</span><span class="turma">Turma 205</span></p>
+        <h1>Utilização da Medicina Tradicional Indígena para o Avanço da Saúde Pública no País</h1>
+        <p class="hero-sub">Saberes ancestrais, pesquisa responsável e um cuidado em saúde que respeita quem cuida e quem é cuidado.</p>
+        <p class="hero-intro">Os povos indígenas do Brasil construíram, ao longo de gerações, conhecimentos profundos sobre plantas e formas de cuidado. Este site acompanha o nosso pôster e mostra como esses saberes podem dialogar com a ciência e com o SUS, sempre com ética e respeito.</p>
+        <a class="botao" href="#saberes">Explorar o conteúdo</a>
+      </div>
+
+      <figure class="hero-figura" aria-hidden="true">
+        <svg class="ramo" viewBox="0 0 320 420" focusable="false">
+          <path class="ramo-caule" d="M160 410 C 158 330, 150 250, 168 170 C 180 115, 176 70, 160 20" />
+          <g class="ramo-folhas">
+            <ellipse cx="0" cy="0" rx="46" ry="17" transform="translate(112 350) rotate(-28)" />
+            <ellipse cx="0" cy="0" rx="46" ry="17" transform="translate(206 322) rotate(24)" />
+            <ellipse cx="0" cy="0" rx="44" ry="16" transform="translate(110 280) rotate(-22)" />
+            <ellipse cx="0" cy="0" rx="44" ry="16" transform="translate(210 250) rotate(20)" />
+            <ellipse cx="0" cy="0" rx="40" ry="15" transform="translate(126 205) rotate(-30)" />
+            <ellipse cx="0" cy="0" rx="40" ry="15" transform="translate(212 178) rotate(26)" />
+            <ellipse cx="0" cy="0" rx="34" ry="13" transform="translate(140 132) rotate(-34)" />
+            <ellipse cx="0" cy="0" rx="34" ry="13" transform="translate(202 104) rotate(30)" />
+            <ellipse cx="0" cy="0" rx="26" ry="10" transform="translate(150 62) rotate(-40)" />
+            <ellipse cx="0" cy="0" rx="24" ry="10" transform="translate(180 40) rotate(36)" />
+          </g>
+        </svg>
+        <figcaption>Ilustração botânica estilizada</figcaption>
+      </figure>
+    </section>
+
+    <!-- 2. Conhecimentos tradicionais -->
+    <section id="saberes" class="secao">
+      <div class="secao-cabeca">
+        <h2>Conhecimentos tradicionais</h2>
+        <p class="lead">Para muitos povos indígenas, saber sobre plantas não é um conteúdo separado da vida. Ele faz parte da língua, da relação com o território, das festas, da alimentação e do modo de cuidar das pessoas.</p>
+      </div>
+
+      <div class="saberes-grade">
+        <article class="saber">
+          <h3>Passa de geração em geração</h3>
+          <p>Boa parte desse conhecimento é transmitida pela oralidade: os mais velhos contam, explicam e corrigem, e os mais novos aprendem ouvindo e acompanhando.</p>
+        </article>
+        <article class="saber">
+          <h3>Aprende-se fazendo</h3>
+          <p>Reconhecer uma planta, saber onde ela cresce e como é preparada exige prática, observação e convivência com quem já domina esse saber.</p>
+        </article>
+        <article class="saber">
+          <h3>Cada povo tem o seu saber</h3>
+          <p>Não existe uma única “medicina indígena”. Cada povo tem sua cultura, sua língua e suas próprias práticas de cuidado, ligadas ao lugar onde vive.</p>
+        </article>
+      </div>
+
+      <p class="nota-lateral">O estudo desses conhecimentos pela ciência, respeitando a visão de cada povo, é chamado de <strong>etnociência</strong>.</p>
+    </section>
+
+    <!-- 3. Galeria de plantas -->
+    <section id="plantas" class="secao secao-herbario">
+      <div class="secao-cabeca">
+        <h2>Galeria de plantas</h2>
+        <p class="lead">Toque em uma ficha para ver mais informações sobre cada planta citada no pôster.</p>
+      </div>
+
+      <div class="aviso" role="note">
+        <p><strong>Uso tradicional não é o mesmo que eficácia comprovada.</strong> Os usos abaixo são relatos da tradição. Eles não são recomendações de tratamento e não substituem orientação de profissionais de saúde.</p>
+      </div>
+
+      <div class="herbario" role="list">
+        <button class="ficha" type="button" role="listitem" data-planta="copaiba" aria-expanded="false" aria-controls="detalhe-planta">
+          <svg class="ficha-desenho" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <path class="d-caule" d="M100 190 L100 20" />
+            <g class="d-folha">
+              <ellipse cx="0" cy="0" rx="30" ry="11" transform="translate(70 160) rotate(-20)" />
+              <ellipse cx="0" cy="0" rx="30" ry="11" transform="translate(130 140) rotate(20)" />
+              <ellipse cx="0" cy="0" rx="30" ry="11" transform="translate(70 115) rotate(-20)" />
+              <ellipse cx="0" cy="0" rx="30" ry="11" transform="translate(130 95) rotate(20)" />
+              <ellipse cx="0" cy="0" rx="28" ry="10" transform="translate(72 70) rotate(-22)" />
+              <ellipse cx="0" cy="0" rx="28" ry="10" transform="translate(128 50) rotate(22)" />
+            </g>
+          </svg>
+          <span class="etiqueta">
+            <span class="etiqueta-nome">Copaíba</span>
+            <span class="etiqueta-cientifico"><i>Copaifera</i> spp.</span>
+          </span>
+        </button>
+
+        <button class="ficha" type="button" role="listitem" data-planta="jatoba" aria-expanded="false" aria-controls="detalhe-planta">
+          <svg class="ficha-desenho" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <path class="d-caule" d="M100 190 C 100 150, 98 120, 100 95" />
+            <g class="d-folha">
+              <path d="M100 95 C 60 90, 38 55, 52 22 C 78 30, 100 60, 100 95 Z" />
+              <path d="M100 95 C 140 90, 162 55, 148 22 C 122 30, 100 60, 100 95 Z" />
+            </g>
+            <path class="d-nervura" d="M100 95 C 82 70, 66 45, 54 26 M100 95 C 118 70, 134 45, 146 26" />
+          </svg>
+          <span class="etiqueta">
+            <span class="etiqueta-nome">Jatobá</span>
+            <span class="etiqueta-cientifico"><i>Hymenaea courbaril</i></span>
+          </span>
+        </button>
+
+        <button class="ficha" type="button" role="listitem" data-planta="goiabeira" aria-expanded="false" aria-controls="detalhe-planta">
+          <svg class="ficha-desenho" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <path class="d-caule" d="M40 180 C 80 150, 110 120, 150 40" />
+            <g class="d-folha">
+              <path d="M95 128 C 60 120, 34 92, 38 62 C 70 66, 92 95, 95 128 Z" />
+              <path d="M118 92 C 150 92, 176 72, 180 44 C 148 44, 124 64, 118 92 Z" />
+            </g>
+            <path class="d-nervura" d="M95 128 C 74 106, 54 84, 40 64 M118 92 C 140 78, 160 62, 178 46" />
+            <circle class="d-fruto" cx="62" cy="160" r="18" />
+          </svg>
+          <span class="etiqueta">
+            <span class="etiqueta-nome">Goiabeira</span>
+            <span class="etiqueta-cientifico"><i>Psidium guajava</i></span>
+          </span>
+        </button>
+      </div>
+
+      <div id="detalhe-planta" class="detalhe" hidden tabindex="-1" aria-live="polite"></div>
+
+      <p class="credito">Ilustrações vetoriais estilizadas criadas para este site. Não são retratos exatos das espécies.</p>
+    </section>
+
+    <!-- 4. Da tradição à ciência -->
+    <section id="ciencia" class="secao">
+      <div class="secao-cabeca">
+        <h2>Da tradição à ciência</h2>
+        <p class="lead">Um saber tradicional pode inspirar pesquisas, mas o caminho até a saúde pública tem etapas. Escolha uma etapa para ver o que acontece nela.</p>
+      </div>
+
+      <ol class="trilha" role="tablist" aria-label="Etapas da tradição à ciência">
+        <li role="presentation"><button type="button" role="tab" class="trilha-passo" data-passo="0" aria-selected="true" aria-controls="trilha-painel"><span class="trilha-num">1</span><span class="trilha-rotulo">Conhecimentos tradicionais</span></button></li>
+        <li role="presentation"><button type="button" role="tab" class="trilha-passo" data-passo="1" aria-selected="false" aria-controls="trilha-painel" tabindex="-1"><span class="trilha-num">2</span><span class="trilha-rotulo">Pesquisa científica ética</span></button></li>
+        <li role="presentation"><button type="button" role="tab" class="trilha-passo" data-passo="2" aria-selected="false" aria-controls="trilha-painel" tabindex="-1"><span class="trilha-num">3</span><span class="trilha-rotulo">Avaliação de segurança e eficácia</span></button></li>
+        <li role="presentation"><button type="button" role="tab" class="trilha-passo" data-passo="3" aria-selected="false" aria-controls="trilha-painel" tabindex="-1"><span class="trilha-num">4</span><span class="trilha-rotulo">Contribuições para a saúde pública</span></button></li>
+      </ol>
+
+      <div id="trilha-painel" class="trilha-painel" role="tabpanel">
+        <h3 id="trilha-titulo"></h3>
+        <p id="trilha-texto"></p>
+        <div class="trilha-controles">
+          <button type="button" class="botao botao-linha" id="trilha-anterior">Etapa anterior</button>
+          <button type="button" class="botao" id="trilha-proxima">Próxima etapa</button>
+        </div>
+      </div>
+
+      <p class="destaque">Essa passagem não é automática. Ela depende de pesquisa cuidadosa, de tempo e, principalmente, de colaboração com as comunidades que guardam esses conhecimentos.</p>
+    </section>
+
+    <!-- 5. Desafios éticos -->
+    <section id="etica" class="secao">
+      <div class="secao-cabeca">
+        <h2>Desafios éticos</h2>
+        <p class="lead">Pesquisar saberes tradicionais envolve pessoas, culturas e territórios. Por isso, alguns cuidados são indispensáveis.</p>
+      </div>
+
+      <div class="etica-grade">
+        <article class="etica">
+          <h3>Autonomia das comunidades</h3>
+          <p>Cada comunidade decide se quer participar, o que quer compartilhar e de que forma. Sem consentimento, não há pesquisa ética.</p>
+        </article>
+        <article class="etica">
+          <h3>Proteção dos conhecimentos</h3>
+          <p>Saberes tradicionais não podem ser apropriados por terceiros como se não tivessem dono. Quem os construiu precisa ser reconhecido.</p>
+        </article>
+        <article class="etica">
+          <h3>Preservação dos territórios</h3>
+          <p>As plantas e os saberes dependem do território. Proteger as terras indígenas e a floresta é também proteger esse conhecimento.</p>
+        </article>
+        <article class="etica">
+          <h3>Repartição justa dos benefícios</h3>
+          <p>Se uma pesquisa gerar ganhos, as comunidades que contribuíram com seu conhecimento devem receber parte justa desses benefícios.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. Relação com o SUS -->
+    <section id="sus" class="secao">
+      <div class="secao-cabeca">
+        <h2>Relação com o SUS</h2>
+        <p class="lead">Quando o sistema de saúde conhece e respeita a cultura de quem atende, o cuidado tende a ser mais acolhedor e a confiança aumenta.</p>
+      </div>
+
+      <div class="sus-colunas">
+        <div class="sus-bloco sus-sim">
+          <h3>O que esse diálogo pode trazer</h3>
+          <ul>
+            <li>Profissionais que escutam e entendem como cada povo compreende saúde e doença.</li>
+            <li>Atendimento que considera a língua, os costumes e a realidade da comunidade.</li>
+            <li>Troca de conhecimentos, como em ações de educação popular sobre plantas medicinais na atenção básica.</li>
+            <li>Mais confiança entre comunidades e serviços de saúde.</li>
+          </ul>
+        </div>
+        <div class="sus-bloco sus-nao">
+          <h3>O que isso não significa</h3>
+          <ul>
+            <li>Que práticas tradicionais devam substituir tratamentos médicos necessários.</li>
+            <li>Que qualquer uso tradicional já seja comprovado pela ciência.</li>
+            <li>Que os conhecimentos possam ser usados sem a participação das comunidades.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="destaque">Valorizar a cultura e garantir acesso a tratamentos eficazes não são caminhos opostos. Um atendimento inclusivo busca as duas coisas ao mesmo tempo.</p>
+    </section>
+
+    <!-- 7. Quiz -->
+    <section id="quiz" class="secao">
+      <div class="secao-cabeca">
+        <h2>Quiz</h2>
+        <p class="lead">Três perguntas para revisar o que vimos. A resposta aparece assim que você escolhe uma opção.</p>
+      </div>
+
+      <div class="quiz" id="quiz-area">
+        <p class="quiz-progresso" id="quiz-progresso"></p>
+        <h3 class="quiz-pergunta" id="quiz-pergunta"></h3>
+        <div class="quiz-opcoes" id="quiz-opcoes"></div>
+        <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+        <button type="button" class="botao" id="quiz-avancar" hidden>Próxima pergunta</button>
+      </div>
+
+      <div class="quiz quiz-final" id="quiz-final" hidden>
+        <h3 id="quiz-resultado"></h3>
+        <p id="quiz-mensagem"></p>
+        <button type="button" class="botao" id="quiz-reiniciar">Refazer o quiz</button>
+      </div>
+    </section>
+
+    <!-- 8. Conclusão -->
+    <section id="conclusao" class="secao conclusao">
+      <h2>Conclusão</h2>
+      <p>Os conhecimentos ancestrais dos povos indígenas têm valor próprio e fazem parte da história e da cultura do Brasil. Eles podem inspirar avanços na saúde pública, desde que a pesquisa científica seja feita com responsabilidade, consentimento e repartição justa dos benefícios.</p>
+      <p>Mais do que estudar plantas, trata-se de respeitar os povos que as conhecem, proteger seus territórios e construir um cuidado em saúde que inclua todos.</p>
+    </section>
+
+    <!-- Biblioteca de Conhecimento -->
+    <section id="biblioteca" class="secao">
+      <div class="secao-cabeca">
+        <h2>Biblioteca de Conhecimento</h2>
+        <p class="lead">Explore documentários, pesquisas e materiais institucionais para aprofundar seus conhecimentos sobre a medicina tradicional indígena, a saúde pública e a valorização dos saberes ancestrais.</p>
+      </div>
+
+      <div class="filtros" role="group" aria-label="Filtrar materiais por tipo">
+        <button type="button" class="filtro" data-filtro="todos" aria-pressed="true">Todos</button>
+        <button type="button" class="filtro" data-filtro="video" aria-pressed="false">Vídeos</button>
+        <button type="button" class="filtro" data-filtro="leitura" aria-pressed="false">Livros e leituras</button>
+        <button type="button" class="filtro" data-filtro="institucional" aria-pressed="false">Fontes institucionais</button>
+      </div>
+      <p class="filtro-status sr" id="filtro-status" aria-live="polite"></p>
+
+      <div class="biblioteca">
+        <article class="material material-destaque" data-tipo="video">
+          <div class="player" id="player-trailer">
+            <img class="player-capa" src="https://i.ytimg.com/vi/ZaY1LELD5wE/hqdefault.jpg" alt="Imagem do trailer de Mboraihu: O espírito que nos une" loading="lazy" onerror="this.remove()">
+            <button type="button" class="player-botao" id="player-botao" data-video="ZaY1LELD5wE">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+              <span id="player-rotulo">Carregar o trailer</span>
+            </button>
+          </div>
+          <div class="material-corpo">
+            <p class="material-tipo">Vídeo em destaque</p>
+            <h3>Mboraihu: O Espírito que nos Une</h3>
+            <p class="material-fonte">Fiocruz. Produzido pelo grupo de pesquisa Ambiente, Diversidade e Saúde.</p>
+            <p>Documentário que aborda os conhecimentos tradicionais do povo Guarani Kaiowá, incluindo saberes relacionados às plantas medicinais, à memória coletiva e à relação entre saúde, cultura e meio ambiente.</p>
+            <div class="material-aprender">
+              <h4>O que você vai aprender</h4>
+              <p>Como conhecimentos tradicionais são preservados e transmitidos entre gerações e por que é importante valorizar as comunidades que mantêm esses saberes vivos.</p>
+            </div>
+            <div class="material-acoes">
+              <a class="botao botao-externo" href="https://portal.fiocruz.br/video/2-mboraihu-o-espirito-que-nos-une" target="_blank" rel="noopener noreferrer">Assistir ao documentário<svg class="icone-externo" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M12 9.5v3a1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3"/></svg><span class="sr">(abre em nova aba)</span></a>
+              <a class="botao botao-linha botao-externo" href="https://www.youtube.com/watch?v=ZaY1LELD5wE" target="_blank" rel="noopener noreferrer">Trailer no YouTube<svg class="icone-externo" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M12 9.5v3a1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3"/></svg><span class="sr">(abre em nova aba)</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="material" data-tipo="video">
+          <div class="material-capa capa-video" aria-hidden="true"><svg viewBox="0 0 120 80" focusable="false"><circle cx="60" cy="40" r="22" class="c-circulo"/><path d="M54 30 L70 40 L54 50 Z" class="c-icone"/><path d="M8 72 C 30 60, 40 66, 52 58" class="c-ramo"/><ellipse cx="24" cy="64" rx="9" ry="4" transform="rotate(-25 24 64)" class="c-folha"/><ellipse cx="40" cy="61" rx="8" ry="3.5" transform="rotate(20 40 61)" class="c-folha"/></svg></div>
+          <div class="material-corpo">
+            <p class="material-tipo">Vídeo</p>
+            <h3>Saúde Indígena: atenção diferenciada e políticas públicas para territórios indígenas</h3>
+            <p class="material-fonte">Fiocruz (Ensp e Icict), na plataforma Educare. Cerca de 22 minutos.</p>
+            <p>Documentário sobre a atenção à saúde dos povos indígenas, as políticas públicas e os desafios de oferecer um atendimento que respeite suas particularidades culturais.</p>
+            <div class="material-aprender">
+              <h4>O que você vai aprender</h4>
+              <p>Por que a atenção à saúde indígena precisa considerar as características culturais e as necessidades específicas das comunidades.</p>
+            </div>
+            <a class="botao botao-externo" href="https://educare.fiocruz.br/resource/show?id=ennM6XIx" target="_blank" rel="noopener noreferrer">Assistir na Fiocruz<svg class="icone-externo" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M12 9.5v3a1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3"/></svg><span class="sr">(abre em nova aba)</span></a>
+          </div>
+        </article>
+        <article class="material" data-tipo="video">
+          <div class="material-capa capa-video" aria-hidden="true"><svg viewBox="0 0 120 80" focusable="false"><circle cx="60" cy="40" r="22" class="c-circulo"/><path d="M54 30 L70 40 L54 50 Z" class="c-icone"/><path d="M8 72 C 30 60, 40 66, 52 58" class="c-ramo"/><ellipse cx="24" cy="64" rx="9" ry="4" transform="rotate(-25 24 64)" class="c-folha"/><ellipse cx="40" cy="61" rx="8" ry="3.5" transform="rotate(20 40 61)" class="c-folha"/></svg></div>
+          <div class="material-corpo">
+            <p class="material-tipo">Vídeo</p>
+            <h3>Xawara e Saúde</h3>
+            <p class="material-fonte">VideoSaúde Distribuidora (Icict/Fiocruz), 2023.</p>
+            <p>Documentário sobre a emergência sanitária no território Yanomami e os desafios da assistência à saúde em um contexto marcado por problemas ambientais, territoriais e sociais.</p>
+            <p class="material-nota">Este filme amplia o contexto da saúde indígena. Ele não é um documentário sobre plantas medicinais.</p>
+            <div class="material-aprender">
+              <h4>O que você vai aprender</h4>
+              <p>Como as condições ambientais e territoriais podem influenciar a saúde das comunidades indígenas.</p>
+            </div>
+            <a class="botao botao-externo" href="https://www.icict.fiocruz.br/video/xawara-e-saude" target="_blank" rel="noopener noreferrer">Assistir na Fiocruz<svg class="icone-externo" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M12 9.5v3a1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3"/></svg><span class="sr">(abre em nova aba)</span></a>
+          </div>
+        </article>
+        <article class="material" data-tipo="leitura">
+          <div class="material-capa capa-leitura" aria-hidden="true"><svg viewBox="0 0 120 80" focusable="false"><path d="M30 22 C 42 18, 52 20, 60 26 C 68 20, 78 18, 90 22 L90 60 C 78 56, 68 58, 60 64 C 52 58, 42 56, 30 60 Z" class="c-livro"/><path d="M60 26 L60 64" class="c-ramo"/><path d="M72 46 C 74 36, 80 30, 86 28 C 86 38, 80 44, 72 46 Z" class="c-folha"/></svg></div>
+          <div class="material-corpo">
+            <p class="material-tipo">Livro e leitura</p>
+            <h3>Jardins da História: Medicinas Indígenas</h3>
+            <p class="material-fonte">Repositório de dados de pesquisa da Fiocruz.</p>
+            <p>Publicação digital sobre conhecimentos tradicionais e plantas medicinais de diferentes povos indígenas brasileiros.</p>
+            <p class="material-nota">Os arquivos da publicação, quando disponíveis, são acessados pela página de origem.</p>
+            <div class="material-aprender">
+              <h4>O que você vai aprender</h4>
+              <p>A diversidade dos conhecimentos tradicionais, a relação entre plantas e práticas de cuidado e a importância de compreender cada povo dentro de seu próprio contexto cultural.</p>
+            </div>
+            <a class="botao botao-externo" href="https://dadosdepesquisa.fiocruz.br/dataset.xhtml?persistentId=doi%3A10.35078%2F7XB1IK" target="_blank" rel="noopener noreferrer">Explorar a publicação<svg class="icone-externo" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M12 9.5v3a1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3"/></svg><span class="sr">(abre em nova aba)</span></a>
+          </div>
+        </article>
+        <article class="material" data-tipo="institucional">
+          <div class="material-capa capa-institucional" aria-hidden="true"><svg viewBox="0 0 120 80" focusable="false"><path d="M32 30 L60 16 L88 30 Z" class="c-icone"/><rect x="36" y="32" width="6" height="26" class="c-icone"/><rect x="51" y="32" width="6" height="26" class="c-icone"/><rect x="63" y="32" width="6" height="26" class="c-icone"/><rect x="78" y="32" width="6" height="26" class="c-icone"/><rect x="30" y="60" width="60" height="5" class="c-icone"/><ellipse cx="96" cy="62" rx="8" ry="3.5" transform="rotate(-35 96 62)" class="c-folha"/></svg></div>
+          <div class="material-corpo">
+            <p class="material-tipo">Fonte institucional</p>
+            <h3>Autorização de Ingresso em Terra Indígena</h3>
+            <p class="material-fonte">Fundação Nacional dos Povos Indígenas (Funai).</p>
+            <p>Página institucional com orientações para quem pretende realizar pesquisa científica em terras indígenas.</p>
+            <ul class="material-etica" aria-label="Pontos éticos citados pela página">
+              <li>Consentimento da comunidade</li>
+              <li>Repartição de benefícios</li>
+              <li>Saberes que podem ser restritos</li>
+            </ul>
+            <p class="material-nota">A página trata da autorização de ingresso para pesquisa e não reúne todas as regras sobre conhecimentos tradicionais.</p>
+            <div class="material-aprender">
+              <h4>O que você vai aprender</h4>
+              <p>A importância da ética na pesquisa, do respeito aos povos indígenas e da proteção dos conhecimentos tradicionais.</p>
+            </div>
+            <a class="botao botao-externo" href="https://www.gov.br/funai/pt-br/atuacao/terras-indigenas/ingresso-em-terra-indigena" target="_blank" rel="noopener noreferrer">Ler as orientações da Funai<svg class="icone-externo" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M12 9.5v3a1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3"/></svg><span class="sr">(abre em nova aba)</span></a>
+          </div>
+        </article>
+        <article class="material" data-tipo="institucional">
+          <div class="material-capa capa-institucional" aria-hidden="true"><svg viewBox="0 0 120 80" focusable="false"><path d="M32 30 L60 16 L88 30 Z" class="c-icone"/><rect x="36" y="32" width="6" height="26" class="c-icone"/><rect x="51" y="32" width="6" height="26" class="c-icone"/><rect x="63" y="32" width="6" height="26" class="c-icone"/><rect x="78" y="32" width="6" height="26" class="c-icone"/><rect x="30" y="60" width="60" height="5" class="c-icone"/><ellipse cx="96" cy="62" rx="8" ry="3.5" transform="rotate(-35 96 62)" class="c-folha"/></svg></div>
+          <div class="material-corpo">
+            <p class="material-tipo">Fonte institucional</p>
+            <h3>Secretaria de Saúde Indígena (Sesai)</h3>
+            <p class="material-fonte">Ministério da Saúde.</p>
+            <p>Página institucional do Ministério da Saúde dedicada à saúde indígena e à atuação da Sesai, responsável pelo Subsistema de Atenção à Saúde Indígena dentro do SUS.</p>
+            <div class="material-aprender">
+              <h4>O que você vai aprender</h4>
+              <p>Como a saúde dos povos indígenas é contemplada nas políticas públicas brasileiras e como a atenção à saúde indígena se relaciona com o SUS.</p>
+            </div>
+            <a class="botao botao-externo" href="https://www.gov.br/saude/pt-br/composicao/sesai/saude-indigena/" target="_blank" rel="noopener noreferrer">Conhecer a fonte oficial<svg class="icone-externo" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.5 2.5h4v4M13.5 2.5 7.5 8.5M12 9.5v3a1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3"/></svg><span class="sr">(abre em nova aba)</span></a>
+          </div>
+        </article>
+      </div>
+
+      <aside class="porque" aria-labelledby="porque-titulo">
+        <h3 id="porque-titulo">Por que esses conteúdos são importantes?</h3>
+        <p>Os conhecimentos tradicionais dos povos indígenas fazem parte de histórias, culturas e práticas de cuidado transmitidas entre gerações. O estudo desses conhecimentos pode contribuir para novas perguntas e investigações científicas, inclusive sobre plantas medicinais.</p>
+        <p>Entretanto, reconhecer um uso tradicional não significa afirmar que sua eficácia clínica já foi comprovada. Pesquisas científicas precisam avaliar a segurança e a eficácia dos possíveis tratamentos.</p>
+        <p>Também é essencial respeitar os direitos dos povos indígenas, proteger seus conhecimentos e assegurar que a realização de pesquisas ocorra de maneira ética e responsável.</p>
+        <p class="porque-fecho">Conhecimento tradicional, pesquisa científica e respeito cultural devem caminhar juntos.</p>
+      </aside>
+    </section>
+
+    <!-- 9. Referências -->
+    <section id="referencias" class="secao referencias">
+      <h2>Referências</h2>
+      <ul class="lista-ref">
+        <li>GAUDÊNCIO, Jéssica da Silva; RODRIGUES, Sérgio Paulo Jorge; MARTINS, Décio Ruivo. Indígenas brasileiros e o uso das plantas: saber tradicional, cultura e etnociência. <i>Khronos</i>, n. 9, p. 163–182, 2020.</li>
+        <li>ESCOLA POLITÉCNICA DE SAÚDE JOAQUIM VENÂNCIO. <i>Educação popular e plantas medicinais na atenção básica à saúde</i>. Rio de Janeiro: Fundação Oswaldo Cruz, [2023?].</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <img class="logo logo-rodape" src="data:image/png;base64,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" alt="Colégio de Aplicação Univali e UNIVALI" width="474" height="157">
+    <p>Science Fest. Turma 205, Ensino Médio, Colégio de Aplicação Univali.</p>
+    <p>Conteúdo com fins educativos, sem recomendação de tratamento.</p>
+    <p>Ilustrações: desenhos vetoriais feitos para este site.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
